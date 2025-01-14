@@ -23,7 +23,7 @@
       text-align: center;
       color: #333;
     }
-    select, button, input[type="file"] {
+    select, input[type="file"] {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -32,9 +32,14 @@
       font-size: 16px;
     }
     button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
       background-color: #007BFF;
       color: white;
-      border: none;
+      font-size: 16px;
       cursor: pointer;
     }
     button:hover {
@@ -55,6 +60,11 @@
       margin: 0 auto 20px;
       max-width: 200px;
     }
+    .copy-success {
+      color: green;
+      font-size: 14px;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
@@ -68,7 +78,6 @@
     <select id="nomeCliente" disabled>
       <option value="">Carregue um arquivo CSV primeiro</option>
     </select>
-    <button onclick="buscarCliente()" disabled id="buscarButton">Buscar</button>
     <div id="resultado" class="result" style="display: none;">
       <p><strong>Endereço:</strong> <span id="endereco"></span></p>
       <p><strong>Número:</strong> <span id="numero"></span></p>
@@ -77,6 +86,7 @@
       <p><strong>CEP:</strong> <span id="cep"></span></p>
       <p><strong>Telefone:</strong> <span id="telefone"></span></p>
       <button onclick="copiarEnderecoCompleto()">Copiar Endereço Completo</button>
+      <p id="copySuccess" class="copy-success" style="display: none;">Endereço copiado!</p>
     </div>
   </div>
 
@@ -141,14 +151,13 @@
         nomeClienteDropdown.appendChild(option);
       });
 
-      // Habilitar o dropdown e o botão Buscar
+      // Habilitar o dropdown
       nomeClienteDropdown.disabled = false;
-      document.getElementById("buscarButton").disabled = false;
     }
 
-    // Função para buscar o cliente
-    function buscarCliente() {
-      const nomeCliente = document.getElementById("nomeCliente").value;
+    // Adicionar evento ao dropdown para exibir os dados automaticamente
+    document.getElementById("nomeCliente").addEventListener("change", function () {
+      const nomeCliente = this.value;
       const resultadoDiv = document.getElementById("resultado");
       const enderecoSpan = document.getElementById("endereco");
       const numeroSpan = document.getElementById("numero");
@@ -181,10 +190,8 @@
         telefoneSpan.innerHTML = telefoneLink;
 
         resultadoDiv.style.display = "block";
-      } else {
-        alert("Cliente não encontrado!");
       }
-    }
+    });
 
     // Função para copiar o endereço completo
     function copiarEnderecoCompleto() {
@@ -195,9 +202,15 @@
 
       const enderecoCompleto = `${endereco}, ${numero}, ${complemento}, ${bairro}`;
       navigator.clipboard.writeText(enderecoCompleto).then(() => {
-        alert("Endereço copiado para a área de transferência!");
+        const copySuccess = document.getElementById("copySuccess");
+        copySuccess.style.display = "block";
+
+        // Esconde a mensagem de sucesso após 2 segundos
+        setTimeout(() => {
+          copySuccess.style.display = "none";
+        }, 2000);
       }).catch(() => {
-        alert("Falha ao copiar o endereço.");
+        console.error("Falha ao copiar o endereço.");
       });
     }
   </script>
