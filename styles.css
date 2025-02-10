@@ -85,3 +85,17 @@ button.whatsapp:hover {
   align-items: center;
   justify-content: center;
 }
+
+.map {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.map:hover {
+    background-color: #357abd;
+}

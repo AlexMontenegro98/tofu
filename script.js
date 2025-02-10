@@ -110,3 +110,22 @@ function abrirWhatsApp() {
     const whatsappUrl = `https://wa.me/55${numeroLimpo}`;
     window.open(whatsappUrl, '_blank');
 }
+
+function abrirMapa() {
+    const endereco = document.getElementById('endereco').textContent;
+    const numero = document.getElementById('numero').textContent;
+    const bairro = document.getElementById('bairro').textContent;
+    const cep = document.getElementById('cep').textContent;
+    
+    const enderecoCompleto = `${endereco}, ${numero} - ${bairro} - ${cep}`;
+    const encodedEndereco = encodeURIComponent(enderecoCompleto);
+    
+    // Check if device is iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    
+    if (isIOS) {
+        window.location.href = `https://maps.apple.com/maps?q=${encodedEndereco}`;
+    } else {
+        window.location.href = `https://maps.google.com/?q=${encodedEndereco}`;
+    }
+}
