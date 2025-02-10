@@ -67,3 +67,21 @@ button:hover {
   font-size: 14px;
   margin-top: 5px;
 }
+
+button.whatsapp {
+  background-color: #25D366;  /* WhatsApp brand green color */
+}
+
+button.whatsapp:hover {
+  background-color: #128C7E;  /* Darker green for hover state */
+}
+
+.whatsapp i {
+  margin-right: 8px;
+}
+
+.whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
