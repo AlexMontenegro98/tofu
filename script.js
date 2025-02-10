@@ -103,3 +103,10 @@ function copiarEnderecoCompleto() {
     console.error("Falha ao copiar o endereço.");
   });
 }
+
+function abrirWhatsApp() {
+    const telefone = document.getElementById('telefone').textContent;
+    const numeroLimpo = telefone.replace(/\D/g, ''); // Remove non-digits
+    const whatsappUrl = `https://wa.me/55${numeroLimpo}`;
+    window.open(whatsappUrl, '_blank');
+}
