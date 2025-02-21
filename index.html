@@ -14,13 +14,28 @@
 <body>
   <div class="container">
     <img src="logo.png" alt="Logo" class="logo">
-
     <h1>Consulta de Clientes</h1>
-    <label>Carregar Arquivo CSV de Clientes</label>
-    <input type="file" id="csvFile" accept=".csv" />
+
+    <div class="csv-options">
+      <div class="option-box">
+        <h3>Escolha uma opção:</h3>
+        <button id="defaultCsv" class="option-button">
+          <i class="fas fa-database"></i> Usar Lista Padrão
+        </button>
+        <button id="customCsv" class="option-button">
+          <i class="fas fa-file-upload"></i> Carregar Novo Arquivo
+        </button>
+      </div>
+      
+      <div id="fileUploadSection" style="display: none;">
+        <label>Carregar Arquivo CSV de Clientes</label>
+        <input type="file" id="csvFile" accept=".csv" />
+      </div>
+    </div>
+
     <label>Nome do Cliente</label>
     <select id="nomeCliente" disabled>
-      <option value="">Carregue um arquivo CSV primeiro</option>
+      <option value="">Selecione uma fonte de dados</option>
     </select>
     <div id="resultado" class="result" style="display: none;">
       <p><strong>Endereço:</strong> <span id="endereco"></span></p>

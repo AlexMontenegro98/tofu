@@ -1,5 +1,22 @@
 let clientes = [];
 
+document.getElementById('defaultCsv').addEventListener('click', function() {
+  fetch('tofu.csv')
+      .then(response => response.text())
+      .then(data => {
+          processarCSV(data);
+      })
+      .catch(error => {
+          alert('Erro ao carregar o arquivo padrão.');
+      });
+});
+
+document.getElementById('customCsv').addEventListener('click', function() {
+  const fileUploadSection = document.getElementById('fileUploadSection');
+  fileUploadSection.style.display = fileUploadSection.style.display === 'none' ? 'block' : 'none';
+});
+
+
 document.getElementById("csvFile").addEventListener("change", function () {
   const file = this.files[0];
   if (!file) {
